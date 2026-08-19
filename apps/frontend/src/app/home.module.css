@@ -1,0 +1,103 @@
+.heroImage,
+.sideImage {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.heroImage {
+  border: 1px solid var(--border-inverse);
+  background: var(--hc-green-700);
+}
+
+.sideImage {
+  border: 1px solid var(--border-subtle);
+  background: var(--hc-grey-100);
+}
+
+.heroImage img,
+.sideImage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rowHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* ------------------------------------------------------------------ casos */
+
+.case {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 22px;
+  border-top: 2px solid var(--hc-green-300);
+}
+
+.caseName {
+  margin: 0;
+  font: var(--type-h4);
+  color: var(--text-inverse);
+}
+
+.caseText {
+  margin: 0;
+  font: var(--type-body-sm);
+  color: var(--text-inverse-muted);
+}
+
+/* -------------------------------------------------------------------- faq */
+
+.faq {
+  margin-top: 40px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.faqQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+  font: var(--type-h4);
+  font-size: 17px;
+  color: var(--text-strong);
+}
+
+/* Some com o triângulo padrão para usar o chevron próprio. */
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion:hover {
+  color: var(--hc-green-600);
+}
+
+.faqChevron {
+  flex: 0 0 auto;
+  color: var(--hc-green-600);
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+
+.faqItem[open] .faqChevron {
+  transform: rotate(90deg);
+}
+
+.faqAnswer {
+  margin: 0;
+  padding: 0 40px 22px 0;
+  font: var(--type-body);
+  color: var(--text-body);
+}
