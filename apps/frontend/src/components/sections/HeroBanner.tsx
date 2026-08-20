@@ -4,7 +4,7 @@ import { QuoteButton } from '@/components/quote/QuoteButton';
 import { Container } from '@/components/ui/Layout';
 import { Icon } from '@/components/ui/Icon';
 import type { IconName } from '@/data/site';
-import s from './VideoHero.module.css';
+import s from './HeroBanner.module.css';
 
 type Stat = { icon: IconName; value: string; label: string };
 
@@ -17,58 +17,34 @@ type Props = {
   primary: { label: string } & ({ href: string } | { quote: true });
   secondary?: { href: string; label: string };
   stats?: Stat[];
-  /** Vídeo de fundo. Sem ele, o hero usa só o poster. */
-  video?: { webm?: string; mp4?: string };
-  /** Imagem exibida antes do vídeo carregar e no mobile. */
-  poster: string;
-  posterAlt: string;
+  /** Imagem de fundo, atrás do overlay. */
+  image: string;
+  imageAlt: string;
 };
 
-export function VideoHero({
+export function Hero({
   title,
   titleAccent,
   lead,
   primary,
   secondary,
   stats,
-  video,
-  poster,
-  posterAlt,
+  image,
+  imageAlt,
 }: Props) {
-  const hasVideo = Boolean(video?.mp4 || video?.webm);
-
   return (
     <section className={s.hero}>
       <div className={s.media}>
-        {/*
-          O poster é uma <Image> de verdade, com priority: é ele que conta como
-          LCP, então precisa vir otimizado e cedo. O vídeo entra por cima
-          quando puder — em conexão lenta ou com "reduzir movimento" o poster
-          simplesmente permanece.
-        */}
+        {/* Esta imagem é o LCP da home: `priority` a tira da fila de lazy
+            loading e a coloca no preload do documento. */}
         <Image
-          src={poster}
-          alt={posterAlt}
+          src={image}
+          alt={imageAlt}
           fill
           priority
           sizes="100vw"
           style={{ objectFit: 'cover' }}
         />
-        {hasVideo ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster={poster}
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            {video?.webm ? <source src={video.webm} type="video/webm" /> : null}
-            {video?.mp4 ? <source src={video.mp4} type="video/mp4" /> : null}
-          </video>
-        ) : null}
       </div>
 
       <div className={s.scrim} />

@@ -14,8 +14,7 @@
 /* ------------------------------------------------------------- mídia ---- */
 
 .media,
-.media img,
-.media video {
+.media img {
   position: absolute;
   inset: 0;
   width: 100%;
