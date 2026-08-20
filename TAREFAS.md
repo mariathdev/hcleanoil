@@ -1,105 +1,80 @@
 # Tarefas — HCLEAN
 
-Estado em 19/08/2026. Ordenado por prioridade.
+Estado em 20/08/2026. Ordenado por prioridade.
 
 ---
 
-## 1. Terminar a migração para o pop-up de orçamento
+## Concluído
 
-O pop-up está **construído e funcionando**, com as quantidades por produto já
-parametrizadas. Falta trocar os CTAs que ainda navegam para `/contato`.
+- **Pop-up de orçamento** substituiu a página de contato em todo o site. As
+  quantidades são parametrizadas por produto (`data/quote.ts`) e chegam ao
+  e-mail como linhas da tabela principal. Verificado de ponta a ponta com
+  Playwright.
+- **Página `/contato` removida**, com redirect 308 para a home — a URL estava
+  indexada e circula em assinaturas.
+- **Ornamentos de marca** em todas as páginas, via `<Ornament>`.
+- **Auditoria zerada**: de 200 ocorrências para 2 (o 404 respondendo 404).
+  Corrigidos hidratação quebrada, contraste da marca e alvos de toque no mobile.
 
-**Pronto:**
-- `components/quote/QuoteModal.tsx` — pop-up em `<dialog>` nativo (foco preso,
-  Esc, backdrop), com os campos do print: nome, e-mail, DDD+telefone, produto,
-  quantidade e observações.
-- `components/quote/QuoteProvider.tsx` — no layout; qualquer CTA abre o mesmo
-  pop-up, com o produto pré-selecionado.
-- `components/quote/QuoteButton.tsx` — botão que dispara o pop-up.
-- `data/quote.ts` — regras de quantidade por produto (ver seção 2).
-- Backend aceita e formata as quantidades no e-mail (`extractItems`).
-- Cabeçalho já usa o pop-up.
+---
 
-**Falta:**
-- [ ] Trocar `ButtonLink href="/contato"` por `<QuoteButton>` em:
-  - `app/page.tsx` (hero e CTA final)
-  - `app/produtos/page.tsx` e `app/produtos/[slug]/page.tsx`
-  - `app/sobre/page.tsx`
-  - `app/not-found.tsx`
-  - `components/sections/Shared.tsx` (o `CTABanner` recebe `href`; trocar por
-    callback ou por um `QuoteCTABanner`)
-  - `components/site/Footer.tsx` (duas entradas na coluna Atendimento)
-- [ ] Nos cartões e páginas de produto, passar `productSlug` para o pop-up já
-      abrir com o item certo.
-- [ ] **Remover a página `/contato`** (decisão do cliente: só pop-up).
-      Ao remover, tirar também de `data/site.ts` (nav), `app/sitemap.ts` e
-      `components/site/Footer.tsx`. Considerar um redirect de `/contato` para
-      `/` em `next.config.mjs`, já que a URL estava indexada.
-- [ ] Depois disso, apagar `components/sections/ContactForm.tsx` e o
-      `app/contato/`, que ficam órfãos.
+## 1. Regras de quantidade — confirmar com a fábrica
 
-## 2. Regras de quantidade — confirmar com a fábrica
+Em `data/quote.ts`.
 
-Em `data/quote.ts`. O que está valendo hoje:
-
-| Produto | Regra atual | Confirmar |
+| Produto | Regra atual | Situação |
 | --- | --- | --- |
-| Barreiras SeaFence / ABFence | metro linear livre, mín. 1 m | ok (decidido) |
-| Manta absorvente (3 linhas) | múltiplos de 200 un | ok (decidido) |
-| Cordão, rolo, travesseiro, barreiras absorventes | unidade livre | **falta o mínimo/fardamento de cada** |
-| Turfa orgânica | quilo, livre | confirmar se é saco fechado |
-| Kit SOPEP | 50, 100, 200 e 1.000 L, múltipla escolha + qtd | ok |
+| Barreiras SeaFence / ABFence | metro linear livre, mín. 1 m | decidido |
+| Manta absorvente (3 linhas) | múltiplos de 200 un | decidido |
+| Kit SOPEP | 50, 100, 200 e 1.000 L, múltipla escolha + qtd | decidido |
+| Tanque Terrestre | C × L × A livres + qtd | decidido |
 | Kit Primeiro Atendimento | unidade livre | ok |
-| Tanque Terrestre | C × L × A livres + qtd | ok (decidido) |
+| **Cordão, rolo, travesseiro, barreiras absorventes** | unidade livre | **falta o fardamento de cada** |
+| **Turfa orgânica** | quilo, livre | **confirmar se é saco fechado** |
 
-## 3. Assets e ornamentos nas demais páginas
-
-A home recebeu quatro ornamentos de marca (anel, ondas, anéis concêntricos,
-malha de pontos), com os lados alternados para não empilharem.
-
-- [ ] Aplicar o mesmo tratamento em **Produtos**, **Quem somos** e nas páginas
-      de produto. Os componentes já existem em `components/sections/Shared.tsx`:
-      `BrandWaveArt`, `BrandLinesArt`, `BrandRingsArt`, `BrandDotsArt`.
-- [ ] As páginas de produto ainda são muito "texto em bloco" — merecem a mesma
-      composição da home.
-
-## 4. Vídeo do hero
+## 2. Vídeo do hero
 
 - [ ] Colocar `hero.mp4` (e `hero.webm`, se houver) em `public/video/` e trocar
       `HERO_VIDEO` em `app/page.tsx` para
       `{ mp4: '/video/hero.mp4', webm: '/video/hero.webm' }`.
       Enquanto não existir, o hero usa o poster, que é foto real da operação.
 
-## 5. Imagens
+## 3. Imagens
 
 - [ ] **Barreira em tiras e barreira flocada dividem a mesma foto** — era a
       única disponível no site antigo, apesar de serem produtos distintos
       (12× vs 6× de absorção).
 - [ ] Turfa orgânica: a foto é da embalagem, não do material.
-- [ ] Só existe **uma** foto de operação real (`barreira-em-operacao.webp`), e
-      ela é de 1024×680 — fica mole em tela cheia. Vale conseguir originais.
+- [ ] Só existe **uma** foto de operação real (`barreira-em-operacao.webp`), em
+      1024×680 — fica mole em tela cheia. Vale conseguir os originais.
 - [ ] Logos de clientes, órgãos e certificados: seção de maior peso comercial,
       ainda não existe.
 
-## 6. Conteúdo pendente
+## 4. Conteúdo pendente
 
-- [ ] **Kit SOPEP por capacidade**: o texto cita 50, 100, 200 e 1.000 L numa
-      página só. Vale separar se cada capacidade tiver ficha própria.
 - [ ] **Depoimentos**: o site antigo tinha a seção com texto de exemplo
       ("Insira aqui o depoimento do cliente"). Não migrei placeholder — se
       houver depoimentos reais, é a seção de maior peso comercial a acrescentar.
+- [ ] **Kit SOPEP por capacidade**: o texto cita 50, 100, 200 e 1.000 L numa
+      página só. Vale separar se cada capacidade tiver ficha própria.
 - [ ] CNPJ e endereço no rodapé, se for para constar.
 
-## 7. Dívidas técnicas
+## 5. Produção
+
+- [ ] **SMTP real.** Hoje o `.env` local aponta para um capturador em
+      `127.0.0.1:2525`. Para valer:
+      `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=587`,
+      `SMTP_USER=contato.hcleanoil@gmail.com` e uma **Senha de App** em
+      `SMTP_PASS` (myaccount.google.com/apppasswords — a senha da conta não
+      funciona com 2FA).
+- [ ] Definir onde hospedar e apontar `NEXT_PUBLIC_API_URL` e `CORS_ORIGINS`.
+
+## 6. Dívidas técnicas
 
 - [ ] O `hclean-designsystem.html` na raiz está com as edições da primeira
-      abordagem (errada), não o original. O original está fora do repositório;
-      restaurar ou remover o arquivo.
+      abordagem (errada), não o original. Restaurar ou remover.
 - [ ] `apps/frontend/fonts/static/` tem 18 `.ttf` de peso fixo que não são
       usados — o site carrega só o variável de `src/fonts/`. ~4 MB de peso morto.
-- [ ] Rodar `node scripts/audit.mjs` depois das mudanças acima. Restam
-      pendências de **alvo de toque no mobile** (links do menu com 26px de
-      altura; o mínimo recomendado é 44px).
 
 ---
 
@@ -117,5 +92,7 @@ cd apps/frontend && npm install && npm run dev
 cd apps/frontend && node scripts/audit.mjs
 ```
 
-Para testar o formulário sem SMTP real, existe um capturador local de e-mails
-que sobe em `http://localhost:8025` — ver histórico da conversa.
+A auditoria percorre as 13 rotas em desktop e mobile, checando erros de
+console, requisições falhas, vazamento horizontal, imagens distorcidas ou sem
+alt, hierarquia de títulos, contraste e alvos de toque. Salva um screenshot de
+cada página em `scripts/screenshots/`.
