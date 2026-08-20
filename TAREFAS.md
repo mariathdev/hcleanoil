@@ -19,6 +19,10 @@ Estado em 20/08/2026.
 - **Depoimentos: nada a migrar.** O site antigo só tinha o texto padrão do
   Elementor ("Insira aqui o depoimento do cliente") com avatar genérico —
   publicar isso seria pior do que não ter a seção.
+- **Páginas por formato**: 6 URLs novas em `/produtos/formato/…` que reúnem o
+  mesmo formato nas três linhas, lado a lado. Cordão e rolo voltam a ter card
+  próprio na vitrine, como no site anterior, sem duplicar conteúdo — cada
+  página compara as linhas em vez de repetir o texto de uma.
 - **Auditorias**: página, pop-up, performance e SEO, todas passando.
 
 ### Mínimos de pedido (em `data/quote.ts`)
@@ -104,6 +108,7 @@ cd apps/frontend
 node scripts/audit.mjs                       # páginas: console, layout, contraste, toque
 node scripts/audit-modal.mjs                 # pop-up: teclado, foco, validação, mobile
 node scripts/check-minimos.mjs               # mínimos de pedido por formato
+node scripts/check-formatos.mjs              # índice de formatos vs. catálogo
 
 npm run build && npx next start -p 3100      # as duas abaixo precisam do build
 node scripts/audit-perf.mjs http://localhost:3100   # peso, LCP, CLS
