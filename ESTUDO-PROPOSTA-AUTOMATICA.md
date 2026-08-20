@@ -76,6 +76,11 @@ Também vale notar: o Kit SOPEP tem preço só para 50 L. O comentário no códi
 registra 100 L = R$ 750 e 200 L = R$ 950, mas isso não está no dicionário — e o
 site já pergunta a capacidade. Dá para cobrir os quatro sem trabalho extra.
 
+> Cobrir os 50l, 100l e 200l.
+> Incluir preço do metro linear da AB-FENCE como "230"
+> Incluir preço do KIT PRIMEIRO ATENDIMENTO como "950"
+> manter apenas manual pro tanque terrestre, botar um alerta no e-mail pra tanque terreste em vermelho no inicio *essa cotação exige personalização*
+
 ---
 
 ## 3. Divergências entre o site e o gerador
@@ -88,6 +93,7 @@ número errado.
 | **Manta** | unidades, múltiplos de 200 | **por pacote**, R$ 2,20 | 400 unidades = 2 pacotes = R$ 4,40, **não** R$ 880 |
 | **Rolo** | unidades | "rolo ou metro", R$ 540 | ambíguo: R$ 540 é o rolo inteiro ou o metro? |
 | **Turfa** | unidades, mín. 10 | **por kg**, R$ 10,00 | quantos kg tem a unidade? |
+> 1 kg = 1 unidade. Mínimo 10kg (10 unidades)
 | **Barreiras** | metro linear | metro | ok |
 | **Cordão, travesseiro** | unidade | unidade | ok |
 

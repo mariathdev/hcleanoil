@@ -54,15 +54,32 @@ Estado em 20/08/2026.
 
 ## 2. Imagens
 
-- [ ] **Barreira em tiras e barreira flocada dividem a mesma foto** — era a
-      única disponível no site antigo, apesar de serem produtos distintos
-      (12× vs 6× de absorção).
+- [x] ~~Barreira em tiras e flocada com a mesma foto~~ — a foto certa já estava
+      no projeto; o erro era o dado apontando as duas para o mesmo arquivo.
+      scripts/check-imagens.mjs agora falha se voltar a acontecer.
 - [ ] Turfa orgânica: a foto é da embalagem, não do material.
 - [ ] Só existe **uma** foto de operação real, em 1024×680. Ela é o fundo do
       hero, ampliada; com o original em resolução maior, ganharia nitidez.
 - [ ] Logos de clientes, órgãos e certificados — não existem no projeto.
 
-## 3. Conteúdo
+## 3. Preços
+
+Ver [PRECOS.md](PRECOS.md) — a tabela do cliente foi transcrita e comparada com
+o gerador de propostas. Seis pontos precisam de confirmação antes de qualquer
+automação; os principais:
+
+- [ ] **Manta**: a tabela tem três espessuras com preços diferentes; o gerador
+      guarda um só. Qual é a de venda?
+- [ ] **Travesseiro**: quatro medidas na tabela, uma no gerador — e nenhuma
+      bate com as duas que o site anuncia.
+- [ ] **Barreira absorvente**: R$ 63,00 a unidade e R$ 21,00 o metro. O site
+      pede unidade, o gerador cobra metro: erra 3×.
+- [ ] **Kit SOPEP 1.000 L** não está na tabela, mas o site oferece.
+
+Decidido nesta rodada: AB-Fence R$ 230/m, Kit Primeiro Atendimento R$ 950/un,
+turfa 1 kg = 1 unidade, tanque segue manual com alerta em vermelho no e-mail.
+
+## 4. Conteúdo
 
 - [ ] **Kit SOPEP por capacidade**: o texto cita 50, 100, 200 e 1.000 L numa
       página só. Vale separar se cada capacidade tiver ficha própria.
@@ -70,7 +87,7 @@ Estado em 20/08/2026.
 - [ ] Depoimentos reais, se houver — é a seção de maior peso comercial que o
       site não tem.
 
-## 4. Dívidas técnicas
+## 5. Dívidas técnicas
 
 - [ ] O `hclean-designsystem.html` na raiz está com as edições da primeira
       abordagem (errada), não o original. Restaurar ou remover.
